@@ -23,6 +23,7 @@ on:
       - feature/*
     tags:
       - v*
+      - x*
   pull_request:
     branches:
       - master
