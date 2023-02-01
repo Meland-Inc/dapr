@@ -112,6 +112,15 @@ jobs:
           rm -r protoc protoc-3.14.0-linux-x86_64.zip
           make init-proto
           make gen-proto check-proto-diff
+      - name: Run make release to build and archive binaries
+        env:
+          GOOS: ${{ matrix.target_os }}
+          GOARCH: ${{ matrix.target_arch }}
+          ARCHIVE_OUT_DIR: ${{ env.ARCHIVE_OUTDIR }}
+        run: |
+          mkdir -p "${ARCHIVE_OUT_DIR}"
+          make release
+        shell: bash
       - name: upload artifacts
         uses: actions/upload-artifact@master
         with:
